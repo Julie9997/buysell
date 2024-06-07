@@ -41,7 +41,7 @@ public class ProductService {
             image3 = toImageEntity(file3);
             product.addImageToProduct(image3);
         }
-        log.info("Saving new Produc. Title: {}; Author: {}", product.getTitle(), product.getAuthor()); // поскольку метод toString() переопределен, подставит строковое представление продукт
+        log.info("Saving new Product. Title: {}; Author: {}", product.getTitle(), product.getAuthor()); // поскольку метод toString() переопределен, подставит строковое представление продукт
         Product productFromDb = productRepository.save(product);
         productFromDb.setPreviewImageId(productFromDb.getImages().get(0).getId());
         productRepository.save(product);

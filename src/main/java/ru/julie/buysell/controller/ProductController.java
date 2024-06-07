@@ -13,6 +13,9 @@ import ru.julie.buysell.services.ProductService;
 
 import javax.imageio.IIOException;
 import java.io.IOException;
+import java.util.Base64;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -44,7 +47,12 @@ public class ProductController {
     public String productInfo(@PathVariable Long id, Model model) {
         Product product = productService.getProductById(id);
         model.addAttribute("product", product);
-        model.addAttribute("images", product.getImages());
+
+        List<String> strA = product.getImages().stream().map(s ->{
+            return Base64.getEncoder().encodeToString(s.getBytes());
+        }).toList();
+
+        model.addAttribute("images", strA);
         return "product-info";
     }
 }
